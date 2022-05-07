@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3">Welcome to Crypto News Home</h1>
+            <p class="lead">The place where you can get all the latest news about Crypto Currency and Blockchain !!!</p>
+        </div>
+  </div>
+  
+    <h3 class="display-6">
+        Top 10 Crypto Currency's
+        <!--<small class="text-muted">exchange rate with respect to INR</small> -->
+        <small class="text-muted">by Market Capitalization</small>
+    </h3>
+
+
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Symbol</th>
+                <th scope="col">Price</th>
+                <th scope="col">Daily High</th>
+                <th scope="col">Daily Low</th>
+                <th scope="col">Market Capital</th>
+            </tr>
+        </thead>
+        {% for key, item in price.DISPLAY.items %}
+            <tbody>
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ key }}</td>
+                    <td>{{ item.INR.FROMSYMBOL }}</td>
+                    <td>{{ item.INR.PRICE }}</td>
+                    <td>{{ item.INR.HIGHDAY }}</td>
+                    <td>{{ item.INR.LOWDAY }}</td>
+                    <td>{{ item.INR.MKTCAP }}</td>
+                </tr>
+        {% endfor %}
+            </tbody>
+    </table>
+
+    <br/><hr>
+
+    <h3 class="display-6">
+        Top News
+        <small class="text-muted">of the day !!</small>
+    </h3>
+    <br/>
+
+    <div class="container">
+        <div class="row">
+            {% for x in api.Data %}
+                <div class="col-sm">
+                    <div class="card" style="width: 18rem;">
+                        <img src=" {{ x.imageurl }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ x.title }}</h5>
+                        <p class="card-text">{{ x.body }}.</p>
+                        <a href="{{ x.url }}" class="btn btn-success">Read story</a>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
